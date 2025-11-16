@@ -127,15 +127,21 @@ function App() {
               {ENTITY_OPTIONS.map((option) => (
                 <TouchableOpacity
                   key={option.key}
-                  style={styles.modalItem}
+                  style={[
+                    styles.modalItem,
+                    selectedEntity === option.key && styles.modalItemSelected
+                  ]}
                   onPress={() => {
                     setSelectedEntity(option.key);
                     setShowModal(false);
                   }}
                 >
-                  <Text style={styles.modalItemText}>{option.label}</Text>
+                  <Text style={[
+                    styles.modalItemText,
+                    selectedEntity === option.key && styles.modalItemTextSelected
+                  ]}>{option.label}</Text>
                   {selectedEntity === option.key && (
-                    <Text style={styles.modalItemCheck}>✓</Text>
+                    <View style={styles.modalItemIndicator} />
                   )}
                 </TouchableOpacity>
               ))}
@@ -300,9 +306,10 @@ const styles = StyleSheet.create({
   },
   header: {
     backgroundColor: "#ffffff",
-    padding: 16,
+    paddingHorizontal: 20,
+    paddingVertical: 16,
     borderBottomWidth: 1,
-    borderBottomColor: "#000000",
+    borderBottomColor: "#f0f0f0",
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
@@ -315,19 +322,20 @@ const styles = StyleSheet.create({
   selector: {
     flexDirection: "row",
     alignItems: "center",
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    borderWidth: 1,
-    borderColor: "#000000",
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+    backgroundColor: "#f8f8f8",
+    borderRadius: 12,
   },
   selectorText: {
-    fontSize: 16,
+    fontSize: 17,
+    fontWeight: "600",
     color: "#000000",
     marginRight: 8,
   },
   selectorArrow: {
-    fontSize: 12,
-    color: "#000000",
+    fontSize: 14,
+    color: "#666666",
   },
   loadingText: {
     marginTop: 12,
@@ -357,25 +365,28 @@ const styles = StyleSheet.create({
   },
   item: {
     backgroundColor: "#ffffff",
-    borderBottomWidth: 1,
-    borderBottomColor: "#e0e0e0",
+    marginHorizontal: 16,
+    marginVertical: 6,
     paddingHorizontal: 16,
-    paddingVertical: 12,
+    paddingVertical: 14,
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: "#f0f0f0",
   },
   itemContainer: {},
   itemTitle: {
-    fontSize: 16,
+    fontSize: 17,
     fontWeight: "600",
     color: "#000000",
-    marginBottom: 4,
+    marginBottom: 6,
   },
   itemSubtitle: {
-    fontSize: 14,
+    fontSize: 15,
     color: "#333333",
-    marginBottom: 2,
+    marginBottom: 4,
   },
   itemDetail: {
-    fontSize: 13,
+    fontSize: 14,
     color: "#666666",
   },
   emptyContainer: {
@@ -388,47 +399,60 @@ const styles = StyleSheet.create({
   },
   modalContainer: {
     flex: 1,
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    backgroundColor: "rgba(0, 0, 0, 0.4)",
     justifyContent: "flex-end",
   },
   modalContent: {
     backgroundColor: "#ffffff",
     maxHeight: "70%",
-    borderTopWidth: 1,
-    borderTopColor: "#000000",
+    borderTopLeftRadius: 16,
+    borderTopRightRadius: 16,
   },
   modalHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    padding: 16,
+    paddingHorizontal: 20,
+    paddingVertical: 18,
     borderBottomWidth: 1,
-    borderBottomColor: "#e0e0e0",
+    borderBottomColor: "#f0f0f0",
   },
   modalTitle: {
-    fontSize: 18,
-    fontWeight: "bold",
+    fontSize: 20,
+    fontWeight: "600",
     color: "#000000",
   },
-  closeButton: {
-    fontSize: 24,
-    color: "#000000",
+  modalClose: {
+    fontSize: 22,
+    color: "#666666",
+    padding: 4,
   },
+  modalScroll: {},
   modalItem: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    padding: 16,
+    paddingHorizontal: 20,
+    paddingVertical: 16,
     borderBottomWidth: 1,
-    borderBottomColor: "#e0e0e0",
+    borderBottomColor: "#f8f8f8",
+  },
+  modalItemSelected: {
+    backgroundColor: "#f0f7ff",
   },
   modalItemText: {
-    fontSize: 16,
+    fontSize: 17,
     color: "#000000",
   },
-  checkmark: {
-    fontSize: 18,
-    color: "#000000",
+  modalItemTextSelected: {
+    color: "#007AFF",
+    fontWeight: "600",
+  },
+  modalItemIndicator: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    backgroundColor: "#007AFF",
   },
 });
 
